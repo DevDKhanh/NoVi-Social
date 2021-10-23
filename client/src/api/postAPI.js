@@ -32,4 +32,8 @@ export const postAPI = {
 		const url = `${routeName}/like`;
 		return axiosClient.put(url, { id });
 	},
+	getReactionCount: id => {
+		const url = `${routeName}/reaction/count?id=${id}`;
+		return axiosClient.get(url);
+	},
 };

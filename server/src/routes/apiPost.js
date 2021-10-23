@@ -20,6 +20,11 @@ router.post(
 	postController.post,
 );
 router.put('/like', middlewaresAuth.authVerify, postController.handleLike);
+router.get(
+	'/reaction/count',
+	middlewaresAuth.authVerify,
+	postController.getCoutnLike,
+);
 router.get('/', middlewaresAuth.authVerify, postController.getPosts);
 
 module.exports = router;

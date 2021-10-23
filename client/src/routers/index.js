@@ -3,20 +3,20 @@ import { Switch, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { ProtectedRoute } from '../utils/Protected';
-import HomePage from '../views/pages/Home';
-import LoginPage from '../views/pages/Auth/Login';
-import RegisterPage from '../views/pages/Auth/Register';
-import UserPage from '../views/pages/User/UserPage';
+import HomePage from '../views/screens/Home';
+import LoginPage from '../views/screens/Auth/Login';
+import RegisterPage from '../views/screens/Auth/Register';
+import UserPage from '../views/screens/User/UserPage';
 
 function Routers() {
 	const { isLogged } = useSelector(state => state.user);
 
 	return (
 		<Switch>
-			<ProtectedRoute path="/login" redirect="/" position={isLogged}>
+			<ProtectedRoute path="/login" redirect="/" dependency={isLogged}>
 				<LoginPage />
 			</ProtectedRoute>
-			<ProtectedRoute path="/register" redirect="/" position={isLogged}>
+			<ProtectedRoute path="/register" redirect="/" dependency={isLogged}>
 				<RegisterPage />
 			</ProtectedRoute>
 			<Route exact path="/friends">
@@ -34,7 +34,7 @@ function Routers() {
 			<Route exact path="/:id/photos">
 				<UserPage />
 			</Route>
-			<ProtectedRoute path="/" redirect="/login" position={!isLogged}>
+			<ProtectedRoute path="/" redirect="/login" dependency={!isLogged}>
 				<HomePage />
 			</ProtectedRoute>
 		</Switch>

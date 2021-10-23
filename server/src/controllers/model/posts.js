@@ -8,9 +8,6 @@ const postSchame = new Schema(
 		feel: { type: String, default: '' },
 		images: { type: Array, default: [] },
 		statusPost: { type: Number, default: 0 },
-		countLike: { type: Number, default: 0 },
-		countShare: { type: Number, default: 0 },
-		countComment: { type: Number, default: 0 },
 	},
 	{
 		timestamps: true,

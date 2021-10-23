@@ -11,4 +11,8 @@ export const meAPI = {
 		const url = `${routeName}/cover-image`;
 		return axiosClient.put(url, formData);
 	},
+	isLike: id => {
+		const url = `${routeName}/isLike?id=${id}`;
+		return axiosClient.get(url);
+	},
 };

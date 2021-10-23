@@ -42,7 +42,8 @@ function CoverImage({ isMe, srcImg }) {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [fileImg]);
+		return () => URL.revokeObjectURL(coverImage);
+	}, [fileImg, coverImage]);
 
 	return (
 		<React.Fragment>
@@ -80,6 +81,9 @@ function CoverImage({ isMe, srcImg }) {
 						name="img-cover"
 						id="file-img-cover"
 						onChange={handleSelectImage}
+						onClick={e => {
+							e.target.value = null;
+						}}
 					/>
 				</label>
 			</ProtectedComponent>

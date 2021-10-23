@@ -14,6 +14,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.put('/avatar', upload.single('file'), meController.updateAvatar);
+router.get('/isLike', meController.isLike);
 router.put(
 	'/cover-image',
 	upload.single('file'),

@@ -7,6 +7,7 @@
 require('dotenv').config();
 const dbUsers = require('./model/users');
 const dbPosts = require('./model/posts');
+const dbLikePosts = require('./model/likePost');
 
 const cloudinary = require('../utils/cloudinary');
 const jwt = require('jsonwebtoken');
@@ -129,6 +130,32 @@ class UserController {
 				}
 			} else {
 				return res.status(400);
+			}
+		} catch (err) {
+			return res.status(500);
+		}
+	}
+
+	async isLike(req, res, next) {
+		try {
+			const { id } = req.query;
+			const token = req.headers['authorization'].split(' ')[1];
+
+			if (!token || token == 'null') {
+				return res.status(200).json({ isLike: false });
+			}
+
+			const data = await jwt.verify(token, process.env.JWT_SECRET);
+			const isLike = await dbLikePosts.findOne({
+				idPost: id,
+				email: data.data.email,
+				status: 0,
+			});
+
+			if (isLike) {
+				return res.status(200).json({ isLike: true });
+			} else {
+				return res.status(200).json({ isLike: false });
 			}
 		} catch (err) {
 			return res.status(500);

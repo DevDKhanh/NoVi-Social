@@ -7,6 +7,7 @@
 require('dotenv').config();
 const dbUsers = require('./model/users');
 const dbPosts = require('./model/posts');
+const dbLikePosts = require('./model/likePost');
 
 const cloudinary = require('../utils/cloudinary');
 const jwt = require('jsonwebtoken');
@@ -150,11 +151,93 @@ class PostController {
 			const { id } = req.body;
 			const token = req.headers['authorization'].split(' ')[1];
 
+			//Check auth
 			const [dataUser, infoPost] = await Promise.all([
 				jwt.verify(token, process.env.JWT_SECRET),
 				dbPosts.findOne({ _id: id }),
 			]);
-			res.json({ infoPost, dataUser });
+
+			if (infoPost && dataUser) {
+				//Find data use liked of this post
+				const isLiked = await dbLikePosts.findOne({
+					idPost: infoPost._id,
+					email: dataUser.data.email,
+				});
+
+				//If liked update status
+				if (isLiked) {
+					if (isLiked.status == 0) {
+						await dbLikePosts.updateOne(
+							{
+								idPost: infoPost._id,
+								email: dataUser.data.email,
+							},
+							{ status: 1 },
+						);
+					} else {
+						await dbLikePosts.updateOne(
+							{
+								idPost: infoPost._id,
+								email: dataUser.data.email,
+							},
+							{ status: 0 },
+						);
+					}
+
+					const countLike = await dbLikePosts.countDocuments({
+						idPost: infoPost._id,
+						status: 0,
+					});
+
+					if (countLike > -1) {
+						return res.status(200).json({ like: countLike });
+					} else {
+						return res.status(500);
+					}
+				} else {
+					//New like
+					const newLike = new dbLikePosts({
+						idPost: infoPost._id,
+						email: dataUser.data.email,
+					});
+					const saveLike = await newLike.save();
+
+					//Count like of post
+					const countLike = await dbLikePosts.countDocuments({
+						idPost: infoPost._id,
+						status: 0,
+					});
+
+					if (saveLike) {
+						return res.status(200).json({ like: countLike });
+					} else {
+						return res.status(500);
+					}
+				}
+			} else {
+				return res.status(500);
+			}
+		} catch (err) {
+			return res.status(500);
+		}
+	}
+
+	async getCoutnLike(req, res, next) {
+		try {
+			const { id } = req.query;
+
+			const countLike = await dbLikePosts.countDocuments({
+				idPost: id,
+				status: 0,
+			});
+
+			if (countLike > -1) {
+				return res
+					.status(200)
+					.json({ like: countLike, cmt: 2, share: 0 });
+			} else {
+				return res.status(500);
+			}
 		} catch (err) {
 			return res.status(500);
 		}
