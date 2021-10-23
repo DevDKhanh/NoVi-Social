@@ -1,0 +1,42 @@
+@import '../../../../styles/variables';
+@import './varisbles';
+
+.box-post {
+	&-interact {
+		user-select: none;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		color: $secondary-text;
+		margin: 1rem;
+		margin-bottom: 0;
+		margin-top: 0.5rem;
+		padding-bottom: 0.6rem;
+		border-bottom: 1px #ccc solid;
+		.count-like {
+			cursor: default;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.icon {
+				color: $color-primary;
+				font-size: 1.3rem;
+				margin-right: 0.5rem;
+			}
+		}
+		.count-other {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.count-item {
+				cursor: pointer;
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+			.count-item + .count-item {
+				margin-left: 1rem;
+			}
+		}
+	}
+}

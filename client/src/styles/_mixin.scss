@@ -1,0 +1,7 @@
+@mixin btnStyle($color, $bg) {
+	background-color: $bg;
+	color: $color;
+}
+@mixin textStyle($color) {
+	color: $color;
+}

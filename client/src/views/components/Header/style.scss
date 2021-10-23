@@ -1,0 +1,179 @@
+@import '../../../styles/variables';
+
+$height-line-menu: 4px;
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	box-shadow: rgb(0, 0, 0, 0.1) 0 1px 4px;
+	z-index: 100;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: $height-header;
+	&-menu {
+		flex: 1;
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		.menu {
+			list-style: none;
+			display: flex;
+			align-items: center;
+			height: 100%;
+			&-item {
+				margin: 0 0.5rem;
+				font-size: 1.8rem;
+				padding: 0 2.5rem;
+				height: 100%;
+				color: $secondary-text;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border: $height-line-menu #fff solid;
+				.icon {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				&:hover {
+					cursor: pointer;
+					border-radius: 0.7rem;
+					background-color: $gray-color-0;
+				}
+			}
+			&-item.active {
+				color: $primary-text;
+				border-bottom: $height-line-menu solid $primary-text;
+				height: 100%;
+				&:hover {
+					cursor: default;
+					border-radius: 0;
+					background-color: transparent;
+				}
+			}
+		}
+	}
+	&-control {
+		display: flex;
+		.list-control {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.item-control + .item-control {
+				margin-left: 0.5rem;
+			}
+			.item-control {
+				font-size: 1.3rem;
+				background-color: $gray-color-1;
+				height: 40px;
+				width: 40px;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				border-radius: 50%;
+				.icon {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+				&:hover {
+					cursor: pointer;
+					background-color: $gray-color-2;
+				}
+			}
+			.item-control.btn-menu,
+			.item-control.btn-account {
+				font-size: 2rem;
+			}
+		}
+	}
+
+	.avatar.active {
+		background-color: #e4f0fa;
+		color: #3b71e6;
+		&:hover {
+			cursor: pointer;
+			background-color: #dce9f3;
+		}
+	}
+
+	.avatar {
+		color: #000;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0.5rem;
+		padding: 0.3rem;
+		border-radius: 3rem;
+		&:hover {
+			cursor: pointer;
+			background-color: $gray-color-0;
+		}
+		.name-user {
+			font-size: 0.9rem;
+			font-weight: 600;
+			margin-left: 0.4rem;
+			max-width: 100px;
+			min-width: 50px;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		img {
+			width: 30px;
+			height: 30px;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+
+	.from-search {
+		margin-left: 1rem;
+		.group-search {
+			display: flex;
+			align-items: center;
+			background-color: $gray-color;
+			height: 40px;
+			width: 245px;
+			border-radius: 2rem;
+			padding: 0 0.2rem;
+			button,
+			input {
+				background-color: transparent;
+				font-size: 1rem;
+				display: inline-block;
+				height: 100%;
+				border: none;
+				color: $secondary-text;
+			}
+			button {
+				min-width: 30px;
+				padding: 0 0.6rem;
+			}
+			input {
+				flex: 1;
+			}
+		}
+	}
+}
+
+.logo {
+	width: 45px;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}

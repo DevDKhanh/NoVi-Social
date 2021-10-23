@@ -1,0 +1,12 @@
+{
+	"name": "Novi",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"serverDev": "npm run dev --prefix server",
+		"client": "npm run start --prefix client",
+		"dev": "concurrently \"npm run serverDev\" \"npm run client\""
+	}
+}

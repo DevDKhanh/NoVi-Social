@@ -1,0 +1,23 @@
+.main-page.user-page {
+	padding: 0;
+}
+
+.main-user {
+	position: relative;
+	max-width: 920px;
+	margin: 0 auto;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+
+	&__posts {
+		width: 58%;
+	}
+
+	&__control {
+		width: 40%;
+		height: max-content;
+		position: sticky;
+		top: calc($height-header + 1rem);
+	}
+}
