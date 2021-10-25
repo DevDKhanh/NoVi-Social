@@ -13,6 +13,6 @@ export const authAPI = {
 	},
 	currentUser: () => {
 		const url = `${routeName}/current-user`;
-		return axiosClient.get(url, {});
+		return axiosClient.get(url);
 	},
 };

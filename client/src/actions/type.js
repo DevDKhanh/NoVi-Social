@@ -9,4 +9,5 @@ export const SITE_TOGGLE_IMG = 'site/toggle-img';
 export const SITE_TOGGLE_FORM = 'site/toggle-form';
 
 export const POSTS_LOAD = 'posts/load';
+export const POSTS_LOAD_ME = 'posts/load-me';
 export const POSTS_NEW_POST = 'posts/new-post';

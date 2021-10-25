@@ -3,12 +3,14 @@ import React, { useState, useEffect } from 'react';
 import './style.scss';
 
 function InputDate({ onChange }) {
+	//=== Get time now ====
 	const dateTime = new Date();
 
 	let day = dateTime.getDate();
 	let month = dateTime.getMonth() + 1;
 	let year = dateTime.getFullYear();
 
+	//=== Set up ===
 	let dayInput = [];
 	let monthInput = [];
 	let yearInput = [];
@@ -19,11 +21,14 @@ function InputDate({ onChange }) {
 	const [monthLoop, setMonthLoop] = useState(month);
 	const [yearLoop] = useState(year);
 
+	//=== add date for option ===
 	const pushIndex = (arr, start, end) => {
 		for (let i = start; i <= end; i++) {
 			arr.unshift(i);
 		}
 	};
+
+	//=== check leap year ===
 	const leapYear = year => {
 		if (
 			(year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) ||
@@ -32,6 +37,8 @@ function InputDate({ onChange }) {
 			return true;
 		else return false;
 	};
+
+	//=== update sate formdata ===
 	const handleChange = e => {
 		const key = e.target.name;
 		if (key === 'day') {
@@ -44,6 +51,7 @@ function InputDate({ onChange }) {
 		onChange(e);
 	};
 
+	//=== update state choice year ===
 	useEffect(() => {
 		if (yearChoice < year) {
 			setMonthLoop(12);
@@ -51,9 +59,6 @@ function InputDate({ onChange }) {
 			setMonthLoop(month);
 		}
 	}, [yearChoice, year, month]);
-	useEffect(() => {
-		pushIndex(monthInput, 1, monthLoop);
-	});
 
 	useEffect(() => {
 		if (yearChoice < year) {
@@ -78,9 +83,6 @@ function InputDate({ onChange }) {
 			}
 		}
 	}, [yearChoice, year, monthChoice, month, day, dayChoice]);
-	useEffect(() => {
-		pushIndex(dayInput, 1, dayLoop);
-	});
 
 	pushIndex(dayInput, 1, dayLoop);
 	pushIndex(monthInput, 1, monthLoop);

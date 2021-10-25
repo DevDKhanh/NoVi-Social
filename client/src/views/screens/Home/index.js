@@ -17,6 +17,7 @@ function HomePage() {
 	const { posts } = useSelector(state => state.posts);
 
 	useEffect(() => {
+		document.title = 'NoVi';
 		window.scrollTo(0, 0);
 	}, []);
 
@@ -32,6 +33,12 @@ function HomePage() {
 				}
 			})
 			.catch(err => console.log('Có lỗi', err));
+		return () => {
+			dispatch({
+				type: typeActions.POSTS_LOAD,
+				payload: [],
+			});
+		};
 	}, [dispatch]);
 
 	return (

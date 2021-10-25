@@ -5,9 +5,10 @@ import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 import { postAPI } from '../../../../api/postAPI';
 import { meAPI } from '../../../../api/meAPI';
 
-function ActionsPost({ id, setCountReaction, countReaction }) {
+function ActionsPost({ id, setCountReaction, countReaction, setShowComment }) {
 	const [isLike, setIsLike] = useState(false);
 
+	//=====< call api update like post >=====
 	const handleLike = () => {
 		postAPI
 			.handleLike(id)
@@ -15,6 +16,7 @@ function ActionsPost({ id, setCountReaction, countReaction }) {
 			.catch(err => console.log('Có lỗi', err));
 	};
 
+	//=====< call api check user liked post? >=====
 	useEffect(() => {
 		const update = async () => {
 			const res = await meAPI.isLike(id);
@@ -34,7 +36,7 @@ function ActionsPost({ id, setCountReaction, countReaction }) {
 				</span>
 				<span className="text">Thích</span>
 			</div>
-			<div className="post-action">
+			<div className="post-action" onClick={() => setShowComment(true)}>
 				<span className="icon">
 					<BiComment />
 				</span>

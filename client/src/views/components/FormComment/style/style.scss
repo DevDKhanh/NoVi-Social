@@ -1,0 +1,49 @@
+@import '../../../../styles/variables';
+
+.form-comment {
+	margin: 0rem 1rem;
+	padding: 0.5rem 0;
+	border-top: 1px solid $gray-color-2;
+	display: flex;
+
+	.avatar {
+		position: relative;
+		width: 35px;
+		height: 35px;
+		img {
+			border-radius: 50%;
+		}
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			right: -2px;
+			width: 12px;
+			height: 12px;
+			border: 2px solid #fff;
+			background-color: $color-success;
+			border-radius: 50%;
+		}
+	}
+
+	form {
+		flex: 1;
+		margin-left: 0.8rem;
+
+		.form-comment {
+			background-color: $gray-color;
+			border: none;
+			padding: 0.5rem 1rem;
+			border-radius: 2rem;
+			word-break: break-word;
+			outline: none;
+			margin: 0;
+
+			&:empty:before {
+				font-size: 0.9rem;
+				content: attr(placeholder);
+				color: rgb(150, 150, 150);
+			}
+		}
+	}
+}

@@ -100,7 +100,7 @@ header {
 		}
 	}
 
-	.avatar.active {
+	.avatar-header.active {
 		background-color: #e4f0fa;
 		color: #3b71e6;
 		&:hover {
@@ -109,7 +109,7 @@ header {
 		}
 	}
 
-	.avatar {
+	.avatar-header {
 		color: #000;
 		display: flex;
 		justify-content: center;
@@ -117,6 +117,12 @@ header {
 		margin: 0.5rem;
 		padding: 0.3rem;
 		border-radius: 3rem;
+		.avatar {
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			overflow: hidden;
+		}
 		&:hover {
 			cursor: pointer;
 			background-color: $gray-color-0;
@@ -130,12 +136,6 @@ header {
 			white-space: nowrap;
 			overflow: hidden;
 			text-overflow: ellipsis;
-		}
-		img {
-			width: 30px;
-			height: 30px;
-			object-fit: cover;
-			border-radius: 50%;
 		}
 	}
 

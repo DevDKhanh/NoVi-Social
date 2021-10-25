@@ -7,7 +7,7 @@ import { MdOutlineEmojiEmotions } from 'react-icons/md';
 function ActionForm() {
 	const dispatch = useDispatch();
 
-	//Open form and open select image
+	//=====< Open form and open select image >=====
 	const handleOpenForm = () => {
 		dispatch({
 			type: typeActions.SITE_TOGGLE_IMG,

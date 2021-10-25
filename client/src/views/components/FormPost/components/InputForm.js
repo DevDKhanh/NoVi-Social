@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
+import ContentEditable from 'react-contenteditable';
 import { useDispatch, useSelector } from 'react-redux';
 import { FaTimes, FaImages } from 'react-icons/fa';
 import { GiEarthAsiaOceania } from 'react-icons/gi';
 import { MdOutlineEmojiEmotions } from 'react-icons/md';
 
 import * as typeActions from '../../../../actions/type';
+import {
+	trimSpaces,
+	pasteAsPlainText,
+	disableNewlines,
+} from '../../../../utils/handleContentEditable';
 import { ProtectedComponent } from '../../../../utils/Protected';
 import SelectImage from './SelectImage';
 import { postAPI } from '../../../../api/postAPI';
@@ -15,11 +21,13 @@ function InputForm({ props }) {
 	const [content, setContent] = useState('');
 	const [listImage, setListImage] = useState([]);
 
+	//=====< Close form add post >=====
 	const handleCloseForm = () => {
 		dispatch({ type: typeActions.SITE_TOGGLE_FORM, payload: false });
 		dispatch({ type: typeActions.SITE_TOGGLE_IMG, payload: false });
 	};
 
+	//=====< Toggle form add Image >=====
 	const handleToggleSelectImg = toggle => {
 		dispatch({
 			type: typeActions.SITE_TOGGLE_IMG,
@@ -27,11 +35,12 @@ function InputForm({ props }) {
 		});
 	};
 
+	//=====< Submit newpost >=====
 	const handleSubmit = e => {
 		e.preventDefault();
-		if (content.trim() !== '' || listImage.length > 0) {
+		if (trimSpaces(content).trim() !== '' || listImage.length > 0) {
 			const formData = new FormData();
-			formData.append('content', content);
+			formData.append('content', trimSpaces(content));
 			for (let i in listImage) {
 				formData.append('files', listImage[i]);
 			}
@@ -83,12 +92,18 @@ function InputForm({ props }) {
 						</div>
 					</div>
 					<div className="form-post-main__input">
-						<textarea
+						<ContentEditable
+							onPaste={pasteAsPlainText}
+							onKeyPress={disableNewlines}
+							html={content}
+							role="textbox"
 							name="content"
 							id="content"
 							onChange={e => setContent(e.target.value)}
+							disabled={false}
 							placeholder={`${props.firstName} ơi, bạn đang nghĩ gì?`}
-						></textarea>
+							tagName="div"
+						/>
 						<ProtectedComponent dependency={isShowSelectImg}>
 							<SelectImage
 								onClose={() => handleToggleSelectImg(false)}
@@ -119,7 +134,7 @@ function InputForm({ props }) {
 					<div className="form-post-main__buttons">
 						<button
 							className={`btn ${
-								(content.trim() !== '' ||
+								(trimSpaces(content).trim() !== '' ||
 									listImage.length > 0) &&
 								'active'
 							}`}

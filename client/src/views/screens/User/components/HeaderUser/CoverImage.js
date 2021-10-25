@@ -5,9 +5,11 @@ import { useDispatch } from 'react-redux';
 import * as typeActions from '../../../../../actions/type';
 import { meAPI } from '../../../../../api/meAPI';
 import { ProtectedComponent } from '../../../../../utils/Protected';
+import LoadingPlaceHolder from '../../../../components/Effect/LoadingPlaceHolder';
 
-function CoverImage({ isMe, srcImg }) {
+function CoverImage({ isMe, srcImg = '' }) {
 	const dispatch = useDispatch();
+	const [isLoad, setIsLoad] = useState(true);
 	const [coverImage, setCoverImage] = useState(null);
 	const [fileImg, setFileImg] = useState(null);
 
@@ -87,7 +89,12 @@ function CoverImage({ isMe, srcImg }) {
 					/>
 				</label>
 			</ProtectedComponent>
-			<img src={coverImage || srcImg} alt="cover-img" />
+			<LoadingPlaceHolder dependency={isLoad} />
+			<img
+				onLoad={() => setIsLoad(false)}
+				src={coverImage || srcImg}
+				alt="cover-img"
+			/>
 		</React.Fragment>
 	);
 }

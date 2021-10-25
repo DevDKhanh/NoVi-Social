@@ -1,5 +1,5 @@
 import React from 'react';
-import { AiFillLike } from 'react-icons/ai';
+import { ReactComponent as LikeIcon } from '../../../../assets/images/like.svg';
 
 import { ProtectedComponent } from '../../../../utils/Protected';
 
@@ -9,7 +9,7 @@ function InteractPost({ countReaction }) {
 			<div className="count-like">
 				<ProtectedComponent dependency={countReaction.like > 0}>
 					<span className="icon">
-						<AiFillLike />
+						<LikeIcon />
 					</span>
 					<span className="num">{countReaction.like}</span>
 				</ProtectedComponent>

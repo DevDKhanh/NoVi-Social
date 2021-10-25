@@ -5,6 +5,7 @@ import { FaTimes } from 'react-icons/fa';
 function SelectImage({ onClose, setListImage }) {
 	const [imgs, setImgs] = useState([]);
 
+	//====< handle select image update preview and formdata >====
 	const handleSelectImg = e => {
 		for (let i = 0; i < e.target.files.length; i++) {
 			const imgConvert = URL.createObjectURL(e.target.files[i]);
@@ -13,6 +14,7 @@ function SelectImage({ onClose, setListImage }) {
 		}
 	};
 
+	//=====< preview image >=====
 	const imgPreview = () => {
 		return imgs.map((source, index) => {
 			if (index <= 2) {
@@ -31,7 +33,7 @@ function SelectImage({ onClose, setListImage }) {
 		});
 	};
 
-	//CSS select img with size
+	//=====< CSS select img with quantity >=====
 	const choiceClass = size => {
 		if (size === 2) {
 			return 'two';

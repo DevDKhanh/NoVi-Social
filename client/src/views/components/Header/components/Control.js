@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaFacebookMessenger, FaBell } from 'react-icons/fa';
 import { CgMenuGridO } from 'react-icons/cg';
 import { MdOutlineArrowDropDown } from 'react-icons/md';
 
+import LoadingPlaceHolder from '../../Effect/LoadingPlaceHolder';
+
 function Control({ props }) {
+	const [isLoad, setIsLoad] = useState(true);
+
 	return (
 		<div className="header-control">
 			<NavLink
 				to={`/${props.slug ? props.slug : props.id}`}
-				className="avatar"
+				className="avatar-header"
 			>
-				<img src={props.avatar} alt="avatar" />
+				<div className="avatar">
+					<img
+						onLoad={() => setIsLoad(false)}
+						src={props.avatar}
+						alt="avatar"
+					/>
+					<LoadingPlaceHolder dependency={isLoad} styleLoading="2" />
+				</div>
 				<div className="text name-user">{props.firstName}</div>
 			</NavLink>
 			<ul className="list-control">

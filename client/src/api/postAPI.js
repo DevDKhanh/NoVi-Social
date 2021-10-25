@@ -30,10 +30,22 @@ export const postAPI = {
 	},
 	handleLike: id => {
 		const url = `${routeName}/like`;
-		return axiosClient.put(url, { id });
+		return axiosClient.put(
+			url,
+			{ id },
+			{
+				headers: {
+					Authorization: 'Bearer ' + getItemStorage('accessToken'),
+				},
+			},
+		);
 	},
 	getReactionCount: id => {
 		const url = `${routeName}/reaction/count?id=${id}`;
-		return axiosClient.get(url);
+		return axiosClient.get(url, {
+			headers: {
+				Authorization: 'Bearer ' + getItemStorage('accessToken'),
+			},
+		});
 	},
 };

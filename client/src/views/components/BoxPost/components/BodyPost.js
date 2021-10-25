@@ -3,6 +3,7 @@ import React from 'react';
 import { ProtectedComponent } from '../../../../utils/Protected';
 
 function BodyPost({ images }) {
+	//=====< check quatity image then add for element >=====
 	const choiceClass = size => {
 		if (size === 2) {
 			return 'two mutil-img';

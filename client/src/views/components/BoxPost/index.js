@@ -8,8 +8,9 @@ import InteractPost from './components/InteractPost';
 import ActionsPost from './components/ActionsPost';
 import './style/style.scss';
 
-function BoxPost({ props }) {
+function BoxPost({ props, children }) {
 	const [countReaction, setCountReaction] = useState({});
+	const [showComment, setShowComment] = useState(false);
 
 	useEffect(() => {
 		const countReaction = async () => {
@@ -38,7 +39,9 @@ function BoxPost({ props }) {
 					id={props._id}
 					setCountReaction={setCountReaction}
 					countReaction={countReaction}
+					setShowComment={setShowComment}
 				/>
+				{showComment && children}
 			</div>
 		</BoxBlock>
 	);

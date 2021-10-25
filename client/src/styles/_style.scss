@@ -54,6 +54,19 @@ img {
 	margin-top: $height-header;
 	padding: 2rem 0;
 }
+.loading-padding {
+	padding: 3rem;
+}
+.avatar {
+	position: relative;
+	width: 40px;
+	height: 40px;
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+}
 
 .box-block {
 	background-color: #ffffff;

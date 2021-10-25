@@ -1,4 +1,5 @@
 @import '../../../../styles/variables';
+@import '../../../../styles/mixin';
 
 $size-avatar: 11rem;
 
@@ -65,12 +66,16 @@ $size-avatar: 11rem;
 		left: 50%;
 		transform: translateX(-50%);
 		border-radius: 50%;
-		img {
-			border-radius: 50%;
-			border: 5px solid #ffffff;
+		.avatar {
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
+			border: 5px solid #ffffff;
+			border-radius: 50%;
+			overflow: hidden;
+		}
+		.load-avatar {
+			border-radius: 50%;
+			border: 5px solid #ffffff;
 		}
 		.btn-change-avatar {
 			position: absolute;

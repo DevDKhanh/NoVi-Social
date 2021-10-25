@@ -5,7 +5,7 @@ import Form from './components/Form';
 import ActionForm from './components/ActionForm';
 import './style.scss';
 
-function FormPost({ text, props }) {
+function FormPost({ text, props, children }) {
 	const [show, setShow] = useState(false);
 
 	const handleShowForm = () => {

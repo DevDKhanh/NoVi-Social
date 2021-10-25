@@ -20,17 +20,17 @@ function UserPage() {
 	const { id } = useParams();
 
 	//if isMe==flase view is other user
-	const [isMe, setIsMe] = useState(false);
+	const [isMe, setIsMe] = useState(null);
 
 	//State info of user
 	const [user, setUser] = useState({});
 
 	const { dataUser, infoUser } = useSelector(state => state.user);
-	const { posts } = useSelector(state => state.posts);
+	const { postsMe } = useSelector(state => state.posts);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, []);
+	}, [user]);
 
 	useEffect(() => {
 		document.title = `${user.nameUser} | Novi`;
@@ -46,11 +46,18 @@ function UserPage() {
 
 				//Load post of page user
 				dispatch({
-					type: typeActions.POSTS_LOAD,
+					type: typeActions.POSTS_LOAD_ME,
 					payload: postsQuery.posts,
 				});
 			})
 			.catch(err => console.log('Có lỗi', err));
+
+		return () => {
+			dispatch({
+				type: typeActions.POSTS_LOAD_ME,
+				payload: [],
+			});
+		};
 	}, [id, dispatch, user.nameUser, dataUser.email]);
 
 	return (
@@ -64,7 +71,7 @@ function UserPage() {
 				</div>
 				<div className="main-user__posts">
 					{isMe && <FormPost props={isMe ? infoUser : user} />}
-					<ListPost listPosts={posts} />
+					<ListPost listPosts={postsMe} />
 				</div>
 			</section>
 		</MainPage>
