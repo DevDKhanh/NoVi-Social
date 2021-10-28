@@ -34,9 +34,9 @@ class UserController {
 			const data = await jwt.verify(token, process.env.JWT_SECRET);
 			if (data.data && file) {
 				//Find current user
-				const { email } = data.data;
+				const { id } = data.data;
 				const currentUser = await dbUsers.findOne({
-					email: email,
+					_id: id,
 				});
 
 				//Upload file
@@ -53,7 +53,7 @@ class UserController {
 				}
 
 				const readyUpdateAvatar = await dbUsers.updateOne(
-					{ email: email },
+					{ _id: id },
 					{
 						avatar: resCloudinary.secure_url,
 						idImageAvatar: resCloudinary.public_id,
@@ -93,9 +93,9 @@ class UserController {
 
 			if (data.data && file) {
 				//Find current user
-				const { email } = data.data;
+				const { id } = data.data;
 				const currentUser = await dbUsers.findOne({
-					email: email,
+					_id: id,
 				});
 
 				//Upload file
@@ -112,7 +112,7 @@ class UserController {
 				}
 
 				const readyUpdateCoverImage = await dbUsers.updateOne(
-					{ email: email },
+					{ _id: id },
 					{
 						coverImage: resCloudinary.secure_url,
 						idImageCover: resCloudinary.public_id,
@@ -148,7 +148,7 @@ class UserController {
 			const data = await jwt.verify(token, process.env.JWT_SECRET);
 			const isLike = await dbLikePosts.findOne({
 				idPost: id,
-				email: data.data.email,
+				idUser: data.data.id,
 				status: 0,
 			});
 

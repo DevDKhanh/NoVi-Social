@@ -3,8 +3,8 @@ import axiosClient from '.';
 const routeName = '/user';
 
 export const userAPI = {
-	getInfoPublic: email => {
-		const url = `${routeName}/public/${email}`;
+	getInfoPublic: id => {
+		const url = `${routeName}/public/${id}`;
 		return axiosClient.get(url);
 	},
 	getUser: query => {

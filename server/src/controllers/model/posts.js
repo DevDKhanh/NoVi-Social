@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const postSchame = new Schema(
 	{
-		email: { type: String, default: '', require: true },
+		idUser: { type: String, default: '', require: true },
 		content: { type: String, default: '', require: true },
 		feel: { type: String, default: '' },
 		images: { type: Array, default: [] },

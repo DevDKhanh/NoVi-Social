@@ -16,7 +16,7 @@ function App() {
 	useEffect(() => {
 		if (isLogged) {
 			userAPI
-				.getInfoPublic(dataUser.email)
+				.getInfoPublic(dataUser.id)
 				.then(res => {
 					dispatch({
 						type: typeActions.USER_INFO,
@@ -25,7 +25,7 @@ function App() {
 				})
 				.catch(err => console.log('Có lỗi', err));
 		}
-	}, [isLogged, dataUser.email, dispatch]);
+	}, [isLogged, dataUser.id, dispatch]);
 
 	return (
 		<Router>

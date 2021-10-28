@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-router.get('/public/:email', userController.getInfoPublic);
+router.get('/public/:id', userController.getInfoPublic);
 router.get('/data', userController.getUser);
 
 module.exports = router;

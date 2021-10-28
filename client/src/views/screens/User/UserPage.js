@@ -26,15 +26,14 @@ function UserPage() {
 	const [user, setUser] = useState({});
 
 	const { dataUser, infoUser } = useSelector(state => state.user);
-	const { postsMe } = useSelector(state => state.posts);
+	const { posts } = useSelector(state => state.posts);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [user]);
+		document.title = `${user.nameUser} | Novi`;
+	}, [user.nameUser]);
 
 	useEffect(() => {
-		document.title = `${user.nameUser} | Novi`;
-
 		//call API get posts of user and get info user with slug or id
 		Promise.all([postAPI.getPostsMe(id), userAPI.getUser(id)])
 			.then(([postsQuery, data]) => {
@@ -46,7 +45,7 @@ function UserPage() {
 
 				//Load post of page user
 				dispatch({
-					type: typeActions.POSTS_LOAD_ME,
+					type: typeActions.POSTS_LOAD,
 					payload: postsQuery.posts,
 				});
 			})
@@ -54,11 +53,11 @@ function UserPage() {
 
 		return () => {
 			dispatch({
-				type: typeActions.POSTS_LOAD_ME,
+				type: typeActions.POSTS_LOAD,
 				payload: [],
 			});
 		};
-	}, [id, dispatch, user.nameUser, dataUser.email]);
+	}, [id, dispatch, dataUser.email]);
 
 	return (
 		<MainPage className="user-page">
@@ -71,7 +70,7 @@ function UserPage() {
 				</div>
 				<div className="main-user__posts">
 					{isMe && <FormPost props={isMe ? infoUser : user} />}
-					<ListPost listPosts={postsMe} />
+					<ListPost listPosts={posts} />
 				</div>
 			</section>
 		</MainPage>

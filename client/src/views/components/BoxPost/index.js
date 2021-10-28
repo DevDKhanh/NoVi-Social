@@ -23,13 +23,13 @@ function BoxPost({ props, children }) {
 		};
 		countReaction();
 		return () => setCountReaction({});
-	}, [props.email, props._id]);
+	}, [props._id]);
 
 	return (
 		<BoxBlock>
 			<div className="box-post">
 				<HeaderPost
-					email={props.email}
+					idUser={props.idUser}
 					timeCreate={props.createdAt}
 					content={props.content}
 				/>

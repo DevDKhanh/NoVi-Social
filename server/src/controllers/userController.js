@@ -19,8 +19,8 @@ const xss = str => {
 class UserController {
 	async getInfoPublic(req, res, next) {
 		try {
-			const { email } = req.params;
-			const user = await dbUsers.findOne({ email: email });
+			const { id } = req.params;
+			const user = await dbUsers.findOne({ _id: id });
 			return res.status(200).json({
 				avatar: user.avatar,
 				coverImage: user.coverImage,
@@ -51,9 +51,9 @@ class UserController {
 			return res.status(200).json({
 				user: {
 					...rest,
-					coverImage: user.coverImage,
-					nameUser: user.fullName,
-					id: user._id,
+					coverImage: coverImage,
+					nameUser: fullName,
+					id: _id,
 				},
 			});
 		} catch (err) {

@@ -23,7 +23,7 @@ class PostController {
 		try {
 			const token = req.headers['authorization'].split(' ')[1];
 			const dataUser = await jwt.verify(token, process.env.JWT_SECRET);
-			const { email } = dataUser.data;
+			const { id } = dataUser.data;
 			const filesImage = req.files;
 			const content = xss(req.body.content, {});
 
@@ -50,7 +50,7 @@ class PostController {
 					);
 
 					const newPost = await new dbPosts({
-						email: email,
+						idUser: id,
 						content: content,
 						images: listImgPost,
 					});
@@ -68,7 +68,7 @@ class PostController {
 					}
 				} else {
 					const newPost = new dbPosts({
-						email: email,
+						idUser: id,
 						content: content,
 					});
 					const savePost = await newPost.save();
@@ -129,7 +129,7 @@ class PostController {
 			}
 
 			const postsMe = await dbPosts
-				.find({ email: user.email })
+				.find({ idUser: user._id })
 				.sort({ createdAt: -1 });
 
 			if (postsMe) {
@@ -161,7 +161,7 @@ class PostController {
 				//Find data use liked of this post
 				const isLiked = await dbLikePosts.findOne({
 					idPost: infoPost._id,
-					email: dataUser.data.email,
+					idUser: dataUser.data.id,
 				});
 
 				//If liked update status
@@ -170,7 +170,7 @@ class PostController {
 						await dbLikePosts.updateOne(
 							{
 								idPost: infoPost._id,
-								email: dataUser.data.email,
+								idUser: dataUser.data.id,
 							},
 							{ status: 1 },
 						);
@@ -178,7 +178,7 @@ class PostController {
 						await dbLikePosts.updateOne(
 							{
 								idPost: infoPost._id,
-								email: dataUser.data.email,
+								idUser: dataUser.data.id,
 							},
 							{ status: 0 },
 						);
@@ -198,7 +198,7 @@ class PostController {
 					//New like
 					const newLike = new dbLikePosts({
 						idPost: infoPost._id,
-						email: dataUser.data.email,
+						idUser: dataUser.data.id,
 					});
 					const saveLike = await newLike.save();
 

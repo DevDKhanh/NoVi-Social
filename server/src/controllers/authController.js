@@ -38,7 +38,7 @@ class AuthController {
 			const gender = xss(req.body.gender, {});
 
 			//check email in database
-			const isHadMail = await dbUsers.findOne({ emailUser });
+			const isHadMail = await dbUsers.findOne({ email: emailUser });
 			/*status = 0 is failure, status = 1 is successfully, status = -1 is error*/
 			if (
 				firstName &&
@@ -152,7 +152,6 @@ class AuthController {
 						const saveData = await newUser.save();
 
 						//get id User and remove password
-						const { _id, email } = saveData._doc;
 
 						const newAuthAcount = new dbAuthAcount({
 							emailUser: emailUser,
@@ -164,6 +163,7 @@ class AuthController {
 						const saveSetting = await newSetting.save();
 
 						if (saveData && saveSetting && saveAuthAcount) {
+							const { _id } = saveData._doc;
 							const accessToken = jwt.sign(
 								{
 									data: { email, id: _id },
@@ -175,7 +175,7 @@ class AuthController {
 								status: 1,
 								code: 201,
 								message: 'Create successfully!',
-								data: { email, id: _id },
+								data: { id: _id },
 								accessToken,
 								message_vn: 'Tạo tài khoản thành công',
 							});
@@ -227,12 +227,12 @@ class AuthController {
 				email: emailUser,
 				password: derivedKey,
 			});
-			const { _id, email } = dataUser._doc;
 
 			if (dataUser) {
+				const { _id } = dataUser._doc;
 				const accessToken = jwt.sign(
 					{
-						data: { email, id: _id },
+						data: { id: _id },
 					},
 					process.env.JWT_SECRET,
 					{ expiresIn: '100y' },
@@ -242,7 +242,7 @@ class AuthController {
 					code: 201,
 					message: 'Login success',
 					message_vn: 'Đăng nhập thành công',
-					data: { email, id: _id },
+					data: { id: _id },
 					accessToken,
 				});
 			} else {
@@ -272,7 +272,7 @@ class AuthController {
 			const data = await jwt.verify(token, process.env.JWT_SECRET);
 			if (data) {
 				const user = data.data;
-				const isUser = await dbUsers.findOne({ email: user.email });
+				const isUser = await dbUsers.findOne({ _id: user.id });
 
 				if (isUser) {
 					return res.status(200).json({

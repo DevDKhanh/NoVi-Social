@@ -8,7 +8,7 @@ import { ProtectedComponent } from '../../../../utils/Protected';
 import { convertTime, oldTime } from '../../../../utils/convertTime';
 import { userAPI } from '../../../../api/userAPI';
 
-function HeaderPost({ email, timeCreate, content }) {
+function HeaderPost({ idUser, timeCreate, content }) {
 	const [user, setUser] = useState({});
 	const [showDate, setShowDate] = useState(false);
 	const [isLoad, setIsLoad] = useState(true);
@@ -27,14 +27,14 @@ function HeaderPost({ email, timeCreate, content }) {
 	//=====< call api get info user post >=====
 	useEffect(() => {
 		userAPI
-			.getInfoPublic(email)
+			.getInfoPublic(idUser)
 			.then(res => {
 				setUser({ ...res });
 			})
 			.catch(err => console.log(err));
 
 		return () => setUser({});
-	}, [email]);
+	}, [idUser]);
 
 	return (
 		<div className="box-post-header">
