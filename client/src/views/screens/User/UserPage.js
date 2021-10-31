@@ -41,7 +41,7 @@ function UserPage() {
 				setUser(data.user);
 
 				//Check user page if email === email query
-				setIsMe(data.user.email === dataUser.email);
+				setIsMe(data.user.id === dataUser.id);
 
 				//Load post of page user
 				dispatch({
@@ -57,7 +57,7 @@ function UserPage() {
 				payload: [],
 			});
 		};
-	}, [id, dispatch, dataUser.email]);
+	}, [id, dispatch, dataUser.id]);
 
 	return (
 		<MainPage className="user-page">

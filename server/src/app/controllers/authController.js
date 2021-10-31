@@ -5,11 +5,11 @@
 */
 
 require('dotenv').config();
-const dbUsers = require('./model/users');
-const dbSetting = require('./model/setting');
-const dbAuthAcount = require('./model/authAccount');
+const dbUsers = require('../model/users');
+const dbSetting = require('../model/setting');
+const dbAuthAcount = require('../model/authAccount');
 
-const { isUsernameError } = require('../utils/check');
+const { isUsernameError } = require('../..//utils/check');
 const validator = require('validator');
 const pbkdf2 = require('pbkdf2');
 const jwt = require('jsonwebtoken');

@@ -55,7 +55,7 @@ function HeaderPost({ idUser, timeCreate, content }) {
 						to={`/${user.slug ? user.slug : user.id}`}
 						className="name"
 					>
-						{user.nameUser}
+						{user.nameUser && user.nameUser}
 					</NavLink>
 					<div className="time">
 						<span

@@ -5,11 +5,11 @@
 */
 
 require('dotenv').config();
-const dbUsers = require('./model/users');
-const dbPosts = require('./model/posts');
-const dbLikePosts = require('./model/likePost');
+const dbUsers = require('../model/users');
+const dbPosts = require('../model/posts');
+const dbLikePosts = require('../model/likePost');
 
-const cloudinary = require('../utils/cloudinary');
+const cloudinary = require('../../utils/cloudinary');
 const jwt = require('jsonwebtoken');
 const sanitizer = require('sanitizer');
 

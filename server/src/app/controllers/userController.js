@@ -5,8 +5,8 @@
 */
 
 require('dotenv').config();
-const dbUsers = require('./model/users');
-const dbPosts = require('./model/posts');
+const dbUsers = require('../model/users');
+const dbPosts = require('../model/posts');
 
 const jwt = require('jsonwebtoken');
 const sanitizer = require('sanitizer');
@@ -47,7 +47,8 @@ class UserController {
 					_id: id,
 				});
 			}
-			const { password, _id, fullName, coverImage, ...rest } = user._doc;
+			const { email, password, _id, fullName, coverImage, ...rest } =
+				user._doc;
 			return res.status(200).json({
 				user: {
 					...rest,

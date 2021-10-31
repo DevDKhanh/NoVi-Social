@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ function App() {
 	const dispatch = useDispatch();
 	const { isLogged, dataUser } = useSelector(sate => sate.user);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (isLogged) {
 			userAPI
 				.getInfoPublic(dataUser.id)

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const meController = require('../controllers/meController');
+const meController = require('../app/controllers/meController');
 const middlewaresAuth = require('../middlewares/auth');
 
 //setup multer
